@@ -1,6 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+
+import pokemons from "reducers/pokemons";
 
 const PokemonItem = styled.article`
   border: 1px solid #dcdcdc;
@@ -20,7 +22,13 @@ const DeleteButton = styled.button`
 `
 
 const PokemonList = () => {
-  const pokemonList = useSelector((store) => store.pokemons.items)
+  const pokemonList = useSelector((store) => store.pokemons.items);
+  
+  const dispatch = useDispatch();
+
+  const onPokemonToggle = (pokemonId) => {
+    dispatch(pokemons.actions.toggleItem(pokemonId))
+  };
 
   return (
     <section>
@@ -29,7 +37,11 @@ const PokemonList = () => {
           <h2>{pokemon.name}</h2>
           <label>
             Is caught:
-            <input type="checkbox" checked={pokemon.isCaught} /> 
+            <input 
+              type="checkbox" 
+              checked={pokemon.isCaught} 
+              onChange={() => onPokemonToggle(pokemon.id)} 
+            /> 
           </label>
           <DeleteButton><span role="img" aria-label="delete">❌</span></DeleteButton>
         </PokemonItem>

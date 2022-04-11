@@ -18,7 +18,15 @@ const pokemons = createSlice({
   initialState: {
     items: data,
   },
-  reducers: {}
+  reducers: {
+    toggleItem: (store, action) => {
+      store.items.forEach(item => {
+        if(item.id === action.payload) {
+          item.isCaught = !item.isCaught
+        }
+      })
+    }
+  }
 });
 
 export default pokemons;

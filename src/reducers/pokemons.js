@@ -29,6 +29,9 @@ const pokemons = createSlice({
     deleteItem: (store, action) => {
       store.items.splice(action.payload, 1);
     },
+    addItem: (store, action) => {
+      store.items.push(action.payload);
+    },
   },
 });
 

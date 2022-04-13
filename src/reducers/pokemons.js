@@ -22,11 +22,14 @@ const pokemons = createSlice({
     toggleItem: (store, action) => {
       store.items.forEach(item => {
         if(item.id === action.payload) {
-          item.isCaught = !item.isCaught
+          item.isCaught = !item.isCaught;
         }
       })
-    }
-  }
+    },
+    deleteItem: (store, action) => {
+      store.items.splice(action.payload, 1);
+    },
+  },
 });
 
 export default pokemons;

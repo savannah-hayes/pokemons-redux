@@ -30,9 +30,13 @@ const PokemonList = () => {
     dispatch(pokemons.actions.toggleItem(pokemonId))
   };
 
+  const onPokemonDelete = (index) => {
+    dispatch(pokemons.actions.deleteItem(index))
+  };
+
   return (
     <section>
-      {pokemonList.map((pokemon) => (
+      {pokemonList.map((pokemon, index) => (
         <PokemonItem key={pokemon.id}>
           <h2>{pokemon.name}</h2>
           <label>
@@ -43,7 +47,9 @@ const PokemonList = () => {
               onChange={() => onPokemonToggle(pokemon.id)} 
             /> 
           </label>
-          <DeleteButton><span role="img" aria-label="delete">❌</span></DeleteButton>
+          <DeleteButton onClick={() => onPokemonDelete(index)}>
+            <span role="img" aria-label="delete">❌</span>
+          </DeleteButton>
         </PokemonItem>
       ))}
     </section>
